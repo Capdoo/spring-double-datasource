@@ -8,25 +8,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.datasource.app.dto.DireccionDTO;
 import com.datasource.app.dto.MensajeDTO;
-import com.datasource.app.service.DireccionService;
+import com.datasource.app.dto.ModalidadDTO;
+import com.datasource.app.service.ModalidadService;
 
 @RestController
-@RequestMapping("/direcciones")
-public class DireccionController {
+@RequestMapping("/modalidades")
+public class ModalidadController {
 
-	
 	@Autowired
-	DireccionService direccionService;
+	ModalidadService modalidadService;
 	
 	@PostMapping("/registrar")
-	public ResponseEntity<Object> registrar(@RequestBody DireccionDTO direccion){
+	public ResponseEntity<Object> registrar(@RequestBody ModalidadDTO modalidadDTO){
 		
-		direccionService.save(direccion);
-		
-		return new ResponseEntity<Object>(new MensajeDTO("Direccion registrada"),HttpStatus.OK);
+		modalidadService.save(modalidadDTO);
+		return new ResponseEntity<Object>(new MensajeDTO("Modalidad registrada"), HttpStatus.OK);
 	}
-	
-	
 }

@@ -8,7 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.ForeignKey;
 
 @Entity
 @Table(name="empleados")
@@ -16,7 +19,6 @@ public class EmpleadoModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@Column(name = "id")
 	private long idEmpleado;
 	
 	private String apellidoPaterno;
@@ -24,10 +26,12 @@ public class EmpleadoModel {
 	private String nombres;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	//@JoinColumn(name="direccion_id", referencedColumnName = "id_direccion")
-	@JoinColumn(name="direccion_id", unique=true)
-	//@Column(unique=true)
+    @JoinColumn(name = "direccion_id", nullable = false, foreignKey = @ForeignKey(name = "USUARIO_FK_DIRECCION"))
 	private DireccionModel direccion;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cargo_id", nullable = false, foreignKey = @ForeignKey(name = "USUARIO_FK_CARGO"))
+	private CargoModel cargo;
 	
 	
 	public EmpleadoModel() {

@@ -1,11 +1,13 @@
 package com.datasource.app.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -13,15 +15,15 @@ import javax.persistence.Table;
 public class DireccionModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@Column(name = "id")
-	private long id;
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
+	private long idDireccion;
 	
 	private String calle;
 	private String ciudad;
 	private int numero;
 	private int codigoPostal;
 	
-	@OneToOne(mappedBy = "direccion")
+	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "direccion")
 	private EmpleadoModel empleado;
 	
 	public DireccionModel() {
@@ -48,16 +50,18 @@ public class DireccionModel {
 		this.empleado = empleado;
 	}
 */
-	public long getId() {
-		return id;
-	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getCalle() {
 		return calle;
+	}
+
+	public long getIdDireccion() {
+		return idDireccion;
+	}
+
+	public void setIdDireccion(long idDireccion) {
+		this.idDireccion = idDireccion;
 	}
 
 	public void setCalle(String calle) {

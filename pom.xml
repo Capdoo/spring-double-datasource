@@ -14,7 +14,7 @@
 	<name>spring-double-datasource</name>
 	<description>Doble datasource Spring</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
