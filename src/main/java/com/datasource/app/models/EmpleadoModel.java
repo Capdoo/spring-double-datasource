@@ -31,7 +31,7 @@ public class EmpleadoModel {
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cargo_id", nullable = false, foreignKey = @ForeignKey(name = "USUARIO_FK_CARGO"))
-	private CargoModel cargo;
+	private PuestoModel cargo;
 	
 	
 	public EmpleadoModel() {

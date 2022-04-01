@@ -28,13 +28,13 @@ public class ModalidadModel {
 	private double sueldo;
 	
 	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "modalidad")
-	private CargoModel cargo;
+	private PuestoModel cargo;
 
 	public ModalidadModel() {
 		super();
 	}
 
-	public ModalidadModel(String nombre, int horas, double sueldo, CargoModel cargo) {
+	public ModalidadModel(String nombre, int horas, double sueldo, PuestoModel cargo) {
 		super();
 		this.nombre = nombre;
 		this.horas = horas;
@@ -74,11 +74,11 @@ public class ModalidadModel {
 		this.sueldo = sueldo;
 	}
 
-	public CargoModel getCargo() {
+	public PuestoModel getCargo() {
 		return cargo;
 	}
 
-	public void setCargo(CargoModel cargo) {
+	public void setCargo(PuestoModel cargo) {
 		this.cargo = cargo;
 	}
 

@@ -1,20 +1,16 @@
 package com.datasource.app.dto;
 
-public class CargoDTO {
+public class PuestoDTO {
 
-	//private long idCargo;
-	
 	private String nombre;
-
 	private String area;
-	
 	private long idModalidad;
 
-	public CargoDTO() {
+	public PuestoDTO() {
 		super();
 	}
 	
-	public CargoDTO(String nombre, String area, long idModalidad) {
+	public PuestoDTO(String nombre, String area, long idModalidad) {
 		super();
 		this.nombre = nombre;
 		this.area = area;
@@ -44,9 +40,7 @@ public class CargoDTO {
 	public void setIdModalidad(long idModalidad) {
 		this.idModalidad = idModalidad;
 	}
-	//private EmpleadoModel empleado;
 
-	//private ModalidadModel modalidad;	
 }
 
 

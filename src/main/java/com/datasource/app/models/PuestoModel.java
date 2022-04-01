@@ -12,8 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cargos")
-public class CargoModel {
+@Table(name="puestos")
+public class PuestoModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +30,14 @@ public class CargoModel {
 	private EmpleadoModel empleado;
 
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "modalidad_id", nullable = false, foreignKey = @ForeignKey(name = "CARGO_FK_MODALIDAD"))
+    @JoinColumn(name = "modalidad_id", nullable = false, foreignKey = @ForeignKey(name = "PUESTO_FK_MODALIDAD"))
 	private ModalidadModel modalidad;
 
-	public CargoModel() {
+	public PuestoModel() {
 		super();
 	}
 
-	public CargoModel(String nombre, String area, EmpleadoModel empleado, ModalidadModel modalidad) {
+	public PuestoModel(String nombre, String area, EmpleadoModel empleado, ModalidadModel modalidad) {
 		super();
 		this.nombre = nombre;
 		this.area = area;
