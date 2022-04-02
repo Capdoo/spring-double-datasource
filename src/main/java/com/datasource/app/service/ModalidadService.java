@@ -1,5 +1,8 @@
 package com.datasource.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,4 +24,27 @@ public class ModalidadService {
 			nuevaModalidad.setSueldo(modalidadDTO.getSueldo());
 		modalidadRepository.save(nuevaModalidad);
 	}
+	
+	
+	public List<ModalidadDTO> listar(){
+		List<ModalidadDTO> listaModalidades = new ArrayList<>();
+		
+		List<ModalidadModel> listaModalidadesModels = modalidadRepository.findAll();
+		
+		for(ModalidadModel p:listaModalidadesModels){
+			ModalidadDTO modalidadSingle = new ModalidadDTO();
+				modalidadSingle.setNombre(p.getNombre());
+				modalidadSingle.setHoras(p.getHoras());
+				modalidadSingle.setSueldo(p.getSueldo());
+			
+				listaModalidades.add(modalidadSingle);
+		}
+		
+		
+		return listaModalidades;
+	}
 }
+
+
+
+

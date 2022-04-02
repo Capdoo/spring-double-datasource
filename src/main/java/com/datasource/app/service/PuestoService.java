@@ -1,5 +1,8 @@
 package com.datasource.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +37,30 @@ public class PuestoService {
 		
 	}
 	
+	public List<PuestoDTO> listar(){
+		List<PuestoDTO> listaPuestos = new ArrayList<>();
+		
+		List<PuestoModel> listaPuestosModels = puestoRepository.findAll();
+		
+		for(PuestoModel p:listaPuestosModels) {
+			PuestoDTO puestoSingle = new PuestoDTO();
+				puestoSingle.setArea(p.getArea());
+				puestoSingle.setNombre(p.getNombre());
+				puestoSingle.setIdModalidad(p.getModalidad().getIdModalidad());
+			listaPuestos.add(puestoSingle);
+		}
+		
+		
+		return listaPuestos;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
