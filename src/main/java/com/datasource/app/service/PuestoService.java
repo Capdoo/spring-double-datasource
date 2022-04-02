@@ -16,17 +16,22 @@ public class PuestoService {
 	ModalidadRepository modalidadRepository;
 	
 	@Autowired
-	PuestoRepository cargoRepository;
+	PuestoRepository puestoRepository;
 	
 	
 	public void save(PuestoDTO puestoDTO) {
 		
-		ModalidadModel modalidad = modalidadRepository.findById(puestoDTO.getIdModalidad()).get();
+		long idObtenido = puestoDTO.getIdModalidad();
+		System.out.println(idObtenido);
 		
-		PuestoModel nuevoCargo = new PuestoModel();
-			nuevoCargo.setArea(puestoDTO.getArea());
-			nuevoCargo.setNombre(puestoDTO.getNombre());
-			nuevoCargo.setModalidad(modalidad);
+		ModalidadModel modalidad = modalidadRepository.findById(idObtenido).get();
+		
+		PuestoModel nuevoPuesto = new PuestoModel();
+			nuevoPuesto.setArea(puestoDTO.getArea());
+			nuevoPuesto.setNombre(puestoDTO.getNombre());
+			nuevoPuesto.setModalidad(modalidad);
+		puestoRepository.save(nuevoPuesto);
+		
 	}
 	
 }

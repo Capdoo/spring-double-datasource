@@ -14,8 +14,6 @@ public class ModalidadService {
 	@Autowired
 	ModalidadRepository modalidadRepository;
 	
-	
-	
 	public void save(ModalidadDTO modalidadDTO) {
 		ModalidadModel nuevaModalidad = new ModalidadModel();
 			nuevaModalidad.setNombre(modalidadDTO.getNombre());

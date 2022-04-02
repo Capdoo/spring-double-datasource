@@ -3,6 +3,7 @@ package com.datasource.app.models;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class DireccionModel {
 	private int numero;
 	private int codigoPostal;
 	
-	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "direccion")
+	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "direccion", fetch = FetchType.LAZY)
 	private EmpleadoModel empleado;
 	
 	public DireccionModel() {

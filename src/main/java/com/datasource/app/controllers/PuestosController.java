@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.datasource.app.dto.MensajeDTO;
-import com.datasource.app.dto.ModalidadDTO;
 import com.datasource.app.dto.PuestoDTO;
 import com.datasource.app.service.PuestoService;
 
@@ -24,7 +23,7 @@ public class PuestosController {
 	@PostMapping("/registrar")
 	public ResponseEntity<Object> registrar(@RequestBody PuestoDTO puestoDTO){
 		puestoService.save(puestoDTO);
-		return new ResponseEntity<Object>(new MensajeDTO("Puesto registrada"), HttpStatus.OK);
+		return new ResponseEntity<Object>(new MensajeDTO("Puesto registrado"), HttpStatus.OK);
 	
 	}
 }

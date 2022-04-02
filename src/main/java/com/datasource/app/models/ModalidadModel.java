@@ -1,11 +1,15 @@
 package com.datasource.app.models;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,21 +31,26 @@ public class ModalidadModel {
 	@Column(name="sueldo")
 	private double sueldo;
 	
-	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "modalidad")
-	private PuestoModel cargo;
+	
+	@OneToMany(cascade =  CascadeType.ALL,mappedBy = "modalidad")
+	private Set<PuestoModel> puesto;
 
 	public ModalidadModel() {
 		super();
 	}
-
-	public ModalidadModel(String nombre, int horas, double sueldo, PuestoModel cargo) {
+	
+	public ModalidadModel(long idModalidad, String nombre, int horas, double sueldo, Set<PuestoModel> puesto) {
 		super();
+		this.idModalidad = idModalidad;
 		this.nombre = nombre;
 		this.horas = horas;
 		this.sueldo = sueldo;
-		this.cargo = cargo;
+		this.puesto = puesto;
 	}
-	
+
+
+
+
 	public long getIdModalidad() {
 		return idModalidad;
 	}
@@ -74,12 +83,12 @@ public class ModalidadModel {
 		this.sueldo = sueldo;
 	}
 
-	public PuestoModel getCargo() {
-		return cargo;
+	public Set<PuestoModel> getPuesto() {
+		return puesto;
 	}
 
-	public void setCargo(PuestoModel cargo) {
-		this.cargo = cargo;
+	public void setPuesto(Set<PuestoModel> puesto) {
+		this.puesto = puesto;
 	}
 
 	

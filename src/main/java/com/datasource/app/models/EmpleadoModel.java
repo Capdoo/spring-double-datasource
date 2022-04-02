@@ -3,14 +3,15 @@ package com.datasource.app.models;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
 import javax.persistence.ForeignKey;
 
 @Entity
@@ -25,13 +26,13 @@ public class EmpleadoModel {
 	private String apellidoMaterno;
 	private String nombres;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "direccion_id", nullable = false, foreignKey = @ForeignKey(name = "USUARIO_FK_DIRECCION"))
 	private DireccionModel direccion;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cargo_id", nullable = false, foreignKey = @ForeignKey(name = "USUARIO_FK_CARGO"))
-	private PuestoModel cargo;
+	@ManyToOne //(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "puesto_id", referencedColumnName="id_puesto", nullable = false, foreignKey = @ForeignKey(name = "USUARIO_FK_CARGO"))
+	private PuestoModel puesto;
 	
 	
 	public EmpleadoModel() {
@@ -99,4 +100,16 @@ public class EmpleadoModel {
 		this.direccion = direccion;
 	}
 
+
+	public PuestoModel getPuesto() {
+		return puesto;
+	}
+
+
+	public void setPuesto(PuestoModel puesto) {
+		this.puesto = puesto;
+	}
+
+	
+	
 }

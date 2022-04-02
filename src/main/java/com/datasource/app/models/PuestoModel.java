@@ -1,13 +1,18 @@
 package com.datasource.app.models;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,7 +22,7 @@ public class PuestoModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_cargo")
+	@Column(name="id_puesto")
 	private long idCargo;
 	
 	@Column(name="nombre")
@@ -26,24 +31,28 @@ public class PuestoModel {
 	@Column(name="area")
 	private String area;
 	
-	@OneToOne(cascade =  CascadeType.ALL,mappedBy = "cargo")
-	private EmpleadoModel empleado;
+	@OneToMany(cascade =  CascadeType.ALL, mappedBy = "puesto")
+	private Set<EmpleadoModel> empleados;
 
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "modalidad_id", nullable = false, foreignKey = @ForeignKey(name = "PUESTO_FK_MODALIDAD"))
+	@ManyToOne
+    @JoinColumn(name = "modalidad_id", referencedColumnName = "id_modalidad", nullable = false, foreignKey = @ForeignKey(name = "PUESTO_FK_MODALIDAD"))
 	private ModalidadModel modalidad;
 
 	public PuestoModel() {
 		super();
 	}
-
-	public PuestoModel(String nombre, String area, EmpleadoModel empleado, ModalidadModel modalidad) {
+	
+	public PuestoModel(long idCargo, String nombre, String area, Set<EmpleadoModel> empleados,
+			ModalidadModel modalidad) {
 		super();
+		this.idCargo = idCargo;
 		this.nombre = nombre;
 		this.area = area;
-		this.empleado = empleado;
+		this.empleados = empleados;
 		this.modalidad = modalidad;
 	}
+
+
 
 	public long getIdCargo() {
 		return idCargo;
@@ -69,12 +78,12 @@ public class PuestoModel {
 		this.area = area;
 	}
 
-	public EmpleadoModel getEmpleado() {
-		return empleado;
+	public Set<EmpleadoModel> getEmpleados() {
+		return empleados;
 	}
 
-	public void setEmpleado(EmpleadoModel empleado) {
-		this.empleado = empleado;
+	public void setEmpleados(Set<EmpleadoModel> empleados) {
+		this.empleados = empleados;
 	}
 
 	public ModalidadModel getModalidad() {
