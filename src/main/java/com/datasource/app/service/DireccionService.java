@@ -1,5 +1,8 @@
 package com.datasource.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,4 +27,23 @@ public class DireccionService {
 		direccionRepository.save(direccionNueva);
 	}
 	
+	public List<DireccionDTO> obtener(){
+		List<DireccionDTO> direcciones = new ArrayList<>();
+		List<DireccionModel> direccionesModel = direccionRepository.findAll();
+		
+		for(DireccionModel p: direccionesModel) {
+			DireccionDTO direccionDTO = new DireccionDTO();
+				direccionDTO.setCalle(p.getCalle());
+				direccionDTO.setCiudad(p.getCiudad());
+				direccionDTO.setCodigoPostal(p.getCodigoPostal());
+				direccionDTO.setNumero(p.getNumero());
+			direcciones.add(direccionDTO);
+		}
+		
+		return direcciones;
+	}
+	
 }
+
+
+

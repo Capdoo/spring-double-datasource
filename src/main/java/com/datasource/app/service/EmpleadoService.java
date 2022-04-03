@@ -1,5 +1,8 @@
 package com.datasource.app.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,14 +28,10 @@ public class EmpleadoService {
 	PuestoRepository puestoRepository;
 	
 	public void save(EmpleadoDTO empleadoDTO) {
-		
-		//Obtenemos la direccion por Id
+	
 		DireccionModel direccionElegida = direccionRepository.getById(empleadoDTO.getIdDireccion());
-		
-		//Obtenemos el cargo por Id
 		PuestoModel puestoElegido = puestoRepository.getById(empleadoDTO.getIdPuesto());
 
-		
 		EmpleadoModel empleadoNuevo = new EmpleadoModel();
 			empleadoNuevo.setApellidoMaterno(empleadoDTO.getApellidoMaterno());
 			empleadoNuevo.setApellidoPaterno(empleadoDTO.getApellidoPaterno());
@@ -44,5 +43,43 @@ public class EmpleadoService {
 		empleadoRepository.save(empleadoNuevo);
 	}
 	
+	public List<EmpleadoDTO> obtener(){
+		List<EmpleadoDTO> listaEmpleados = new ArrayList<>();
+		List<EmpleadoModel> listaEmpleadosModel = empleadoRepository.findAll();
+		
+		for(EmpleadoModel p: listaEmpleadosModel){
+			EmpleadoDTO empleadoDTO = new EmpleadoDTO();
+				empleadoDTO.setApellidoPaterno(p.getApellidoPaterno());
+				empleadoDTO.setApellidoMaterno(p.getApellidoMaterno());
+				empleadoDTO.setNombre(p.getNombres());
+				empleadoDTO.setIdDireccion(Integer.parseInt(p.getDireccion().getIdDireccion()+""));
+				empleadoDTO.setIdPuesto(p.getPuesto().getIdCargo());
+			listaEmpleados.add(empleadoDTO);
+		}
+		
+		return listaEmpleados;
+	}
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
